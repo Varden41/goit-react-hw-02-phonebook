@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 // import {} from './ContactsSection';
-import ContactForm from './PhonebookSection';
+import ContactForm from './ContactForm';
 
 class App extends Component {
   state = {
