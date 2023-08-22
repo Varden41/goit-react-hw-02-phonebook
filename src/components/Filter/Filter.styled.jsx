@@ -5,6 +5,6 @@ export const LabelStyled = styled.label`
   margin-bottom: 20px;
 `;
 export const InputStyled = styled.input`
-  padding: 20px;
+  padding: 10px;
   margin-left: 20px;
 `;

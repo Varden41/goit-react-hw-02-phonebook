@@ -54,17 +54,7 @@ class App extends Component {
   render() {
     const filteredContacts = this.onFilteredContacts();
     return (
-      <div
-        style={{
-          height: '100vh',
-          flexDirection: 'column',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}
-      >
+      <div>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.dataHandler} />
         <h2>Contacts</h2>

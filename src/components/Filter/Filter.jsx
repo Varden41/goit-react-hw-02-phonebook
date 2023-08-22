@@ -19,7 +19,7 @@ class Filter extends Component {
             type="text"
             name="search"
             value={this.props.filter}
-            onChange={this.onHandleSearch}
+            onChange={this.onSearch}
           />
         </LabelStyled>
       </>
