@@ -32,8 +32,4 @@ ContactList.propTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
-ContactList.propTypes = {
-  filteredContacts: PropTypes.array.isRequired,
-  onDelete: PropTypes.func.isRequired,
-};
 export default ContactList;
