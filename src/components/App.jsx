@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
-// import {} from './ContactsSection';
+import ContactList from './ContactList';
 import ContactForm from './ContactForm';
+import Filter from './Filter';
 
 class App extends Component {
   state = {
@@ -14,15 +15,49 @@ class App extends Component {
     filter: '',
   };
 
-  dataHandler = data => {
-    console.log(data);
+  dataHandler = (submitName, submitNumber) => {
+    if (this.state.contacts.find(contact => contact.name === submitName)) {
+      return alert(`${submitName} is already in contacts.`);
+    }
+    this.setState(PrevieusState => {
+      return {
+        contacts: [
+          ...PrevieusState.contacts,
+          { id: nanoid(), name: submitName, number: submitNumber },
+        ],
+      };
+    });
+  };
+
+  onFilter = filteredText => {
+    this.setState({ filter: filteredText });
+  };
+
+  onFilteredContacts = () => {
+    const { contacts, filter } = this.state;
+    if (filter) {
+      return contacts.filter(contact => {
+        return contact.name.toLowerCase().includes(filter.toLowerCase());
+      });
+    }
+    return contacts;
+  };
+
+  onDelete = deleteId => {
+    this.setState(prevState => {
+      return {
+        contacts: prevState.contacts.filter(contact => contact.id !== deleteId),
+      };
+    });
   };
 
   render() {
+    const filteredContacts = this.onFilteredContacts();
     return (
       <div
         style={{
           height: '100vh',
+          flexDirection: 'column',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -33,6 +68,11 @@ class App extends Component {
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.dataHandler} />
         <h2>Contacts</h2>
+        <Filter onFilter={this.onFilter} filter={this.state.filter} />
+        <ContactList
+          filteredContacts={filteredContacts}
+          onDelete={this.onDelete}
+        />
       </div>
     );
   }
