@@ -15,16 +15,17 @@ class App extends Component {
     filter: '',
   };
 
-  dataHandler = (submitName, submitNumber) => {
-    if (this.state.contacts.find(contact => contact.name === submitName)) {
-      return alert(`${submitName} is already in contacts.`);
+  dataHandler = (name, number) => {
+    if (
+      this.state.contacts.find(
+        contact => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase()
+      )
+    ) {
+      return alert(`${name} is already in contacts.`);
     }
-    this.setState(PrevieusState => {
+    this.setState(previeusState => {
       return {
-        contacts: [
-          ...PrevieusState.contacts,
-          { id: nanoid(), name: submitName, number: submitNumber },
-        ],
+        contacts: [...previeusState.contacts, { id: nanoid(), name, number }],
       };
     });
   };
@@ -35,12 +36,10 @@ class App extends Component {
 
   onFilteredContacts = () => {
     const { contacts, filter } = this.state;
-    if (filter) {
-      return contacts.filter(contact => {
-        return contact.name.toLowerCase().includes(filter.toLowerCase());
-      });
-    }
-    return contacts;
+
+    return contacts.filter(contact => {
+      return contact.name.toLowerCase().includes(filter.toLowerCase());
+    });
   };
 
   onDelete = deleteId => {
